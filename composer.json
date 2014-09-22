@@ -25,9 +25,5 @@
         "psr-0": { "Uneak\\MaijetBundle": "" }
     },
     "target-dir": "Uneak/MailjetBundle",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "master"
-        }
-    }
+    "minimum-stability": "dev"
 }
