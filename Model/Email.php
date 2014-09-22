@@ -153,20 +153,24 @@ class Email {
 		$params["method"] = "POST";
 		$params["from"] = $this->getSender()->getEmailString();
 
-		if (count($this->receiver) > 1) {
-			foreach ($this->receiver as $receiver) {
-				$params["to"][] = $receiver->getEmailString();
+		if (count($this->receiver) > 0) {
+			if (count($this->receiver) > 1) {
+				foreach ($this->receiver as $receiver) {
+					$params["to"][] = $receiver->getEmailString();
+				}
+			} else {
+				$params["to"] = $this->receiver[0]->getEmailString();
 			}
-		} else {
-			$params["to"] = $this->receiver[0]->getEmailString();
 		}
 
-		if (count($this->cc_receiver) > 1) {
-			foreach ($this->cc_receiver as $receiver) {
-				$params["cc"][] = $receiver->getEmailString();
+		if (count($this->cc_receiver) > 0) {
+			if (count($this->cc_receiver) > 1) {
+				foreach ($this->cc_receiver as $receiver) {
+					$params["cc"][] = $receiver->getEmailString();
+				}
+			} else {
+				$params["cc"] = $this->cc_receiver[0]->getEmailString();
 			}
-		} else {
-			$params["cc"] = $this->cc_receiver[0]->getEmailString();
 		}
 
 		$params["subject"] = $this->getSubject();
