@@ -1,0 +1,10 @@
+services:
+            
+    mailjet.email:
+        class: Uneak\MailjetBundle\Model\Email
+        scope: prototype
+        arguments:
+            - @twig
+        calls:
+            - [ setApiKey, [ %mailjet.api_key% ] ]
+            - [ setSecretKey, [ %mailjet.api_secret% ] ]
