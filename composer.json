@@ -22,7 +22,7 @@
         "symfony/yaml": "~2.1"
     },
     "autoload": {
-        "psr-0": { "Uneak\\MaijetBundle": "" }
+        "psr-0": { "Uneak\\MailjetBundle": "" }
     },
     "target-dir": "Uneak/MailjetBundle",
     "minimum-stability": "dev"
