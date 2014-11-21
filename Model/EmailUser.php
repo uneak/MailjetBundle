@@ -25,15 +25,4 @@ class EmailUser implements EmailUserInterface {
 	public function getEmail() {
 		return $this->email;
 	}
-	
-	public function getEmailString() {
-		if ($this->email) {
-			if ($this->name) {
-				$emailString = $this->name." <".$this->email.">";
-			} else {
-				$emailString = $this->email;
-			}
-		}
-		return $emailString;
-	}
 }

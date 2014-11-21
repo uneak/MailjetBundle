@@ -156,20 +156,20 @@ class Email {
 		if (count($this->receiver) > 0) {
 			if (count($this->receiver) > 1) {
 				foreach ($this->receiver as $receiver) {
-					$params["to"][] = $receiver->getEmailString();
+					$params["to"][] = $this->_getEmailString($receiver);
 				}
 			} else {
-				$params["to"] = $this->receiver[0]->getEmailString();
+				$params["to"] = $this->_getEmailString($this->receiver[0]);
 			}
 		}
 
 		if (count($this->cc_receiver) > 0) {
 			if (count($this->cc_receiver) > 1) {
 				foreach ($this->cc_receiver as $receiver) {
-					$params["cc"][] = $receiver->getEmailString();
+					$params["cc"][] = $this->_getEmailString($receiver);
 				}
 			} else {
-				$params["cc"] = $this->cc_receiver[0]->getEmailString();
+				$params["cc"] = $this->_getEmailString($this->cc_receiver[0]);
 			}
 		}
 
@@ -188,8 +188,8 @@ class Email {
 		foreach ($receivers as $receiver) {
 			$params = array();
 			$params["method"] = "POST";
-			$params["from"] = $this->getSender()->getEmailString();
-			$params["to"] = $receiver->getEmailString();
+			$params["from"] = $this->_getEmailString($this->getSender());
+			$params["to"] = $this->_getEmailString($receiver);
 			$params["subject"] = $this->getSubject(array('user' => $receiver));
 			$params[($this->isHtml) ? 'html' : 'text'] = $this->getBody(array('user' => $receiver));
 
@@ -198,6 +198,17 @@ class Email {
 			$success[$receiver->getEmail()] = ($mj->_response_code == 200);
 		}
 		return $success;
+	}
+
+	protected function _getEmailString(EmailUserInterface $user) {
+		if ($user->getEmail()) {
+			if ($user->getName()) {
+				$emailString = $user->getName() . " <" . $user->getEmail() . ">";
+			} else {
+				$emailString = $user->getEmail();
+			}
+		}
+		return $emailString;
 	}
 
 }

@@ -10,5 +10,4 @@ interface EmailUserInterface {
 
 	public function getName();
 	public function getEmail();
-	public function getEmailString();
 }
