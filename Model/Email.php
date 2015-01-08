@@ -151,7 +151,7 @@ class Email {
 	public function send() {
 		$params = array();
 		$params["method"] = "POST";
-		$params["from"] = $this->getSender()->getEmailString();
+		$params["from"] = $this->_getEmailString($this->getSender());
 
 		if (count($this->receiver) > 0) {
 			if (count($this->receiver) > 1) {
